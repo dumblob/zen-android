@@ -1,0 +1,18 @@
+predstavte si, ze zijete ve svete, ktery temer odpovida definici nirvany - neprijde vam takovy svet nudny?
+
+ZENisti jsou prilis konzervativni, tisi, uzavreni, zamereni na klid, relaxaci, pohodu - a my si myslime, ze po nejake chvili pohody clovek prestane vnimat, ze je to pohoda prijde mu to "normalni/bezne", a proto jsme vyvinuli app, ktera pripomene nejen spravnym ZENistum jak vypada spravna pohoda
+
+kdyz se podivam na spravneho zenistu, jak se snazi dosahnout jakesi nirvany, tak jsme premysleli, proc jim to jde tak pomalu/stezi - no a dosli jsme k zaveru, ze maji prilis jednostranny pristup, a proto nemohou dosahnout zadne nirvany
+my vsak vime jak se tomu vyhnout - a sice opacnou zkusenosti - extremnim stresem
+nase aplikace totiz cili na vytvareni stresu
+zaroven uspokojuje pomerne nenasilnym zpusobem (tedy jak kdy :D) osoby nespokojene, zavistive apod. a tedy vede k nirvane i tyto jedince
+
+content
+  prdeni
+  poznamky "tchyni"
+  nahrane kecy od hezke holky (kde a kdy se milacku sejdeme, uz jsme se nevideli delsi dobu)
+  BSOD
+  vyfoceni obrazovky, prepnuti do fullscreenu s cernym pozadim, prekresleni cele obrazovky vyfocenou fotkou a animace "zmensovani" teto fotky obrazovky do stredu az zmizi uplne a vypise se cervene napis "black out" a ten jemne/pomalu zmizi
+
+
+vim: set wrap:
