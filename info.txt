@@ -4,7 +4,8 @@ ZENisti jsou prilis konzervativni, tisi, uzavreni, zamereni na klid, relaxaci, p
 
 kdyz se podivam na spravneho zenistu, jak se snazi dosahnout jakesi nirvany, tak jsme premysleli, proc jim to jde tak pomalu/stezi - no a dosli jsme k zaveru, ze maji prilis jednostranny pristup, a proto nemohou dosahnout zadne nirvany
 my vsak vime jak se tomu vyhnout - a sice opacnou zkusenosti - extremnim stresem
-nase aplikace totiz cili na vytvareni stresu
+proste vime co jim chybi - extremni stres!
+nase aplikace cili na vytvareni stresu
 zaroven uspokojuje pomerne nenasilnym zpusobem (tedy jak kdy :D) osoby nespokojene, zavistive apod. a tedy vede k nirvane i tyto jedince
 
 future: extend with male/female (finer pranks), user-defined distance, wtf?
@@ -30,5 +31,13 @@ namety na nazev aplikace
   ???Mate
   ???Pal
   ???Partner
+  PrankFella
+  ZenFella
+  ZenTwister
+  StressTwister
+
+GUI look
+  fluidui.com (mockup)
+  pozadi muze byt podobne fotce z pozadi banneru na Zen Maraton
 
 vim: set wrap:
