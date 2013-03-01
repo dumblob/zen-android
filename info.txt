@@ -35,6 +35,8 @@ namety na nazev aplikace
   ZenFella
   ZenTwister
   StressTwister
+  Silent
+  Hidden
 
 GUI look
   fluidui.com (mockup)
