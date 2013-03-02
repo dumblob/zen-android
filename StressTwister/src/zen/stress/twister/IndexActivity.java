@@ -7,20 +7,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import zen.stress.twister.R;
+
 import zen.stress.twister.fragments.tabs.TabsFragmentActivity;
 import zen.stress.twister.fragments.tabs.TabsViewPagerFragmentActivity;
 import zen.stress.twister.fragments.viewpager.ViewPagerFragmentActivity;
-
-
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
+
+import com.google.android.gcm.GCMRegistrar;
 
 /**
  * @author mwho
@@ -28,12 +30,12 @@ import android.widget.SimpleAdapter;
  * examples in this project
  */
 public class IndexActivity extends FragmentActivity {
-
 	private FragmentManager fm;
 	private ListFragment list;
 	private List<Map<String, String>> listItems;
 	private String[] froms;
 	private int[] viewIds;
+
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
 	 */
@@ -41,6 +43,18 @@ public class IndexActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.index_list_view);
+
+		Resources res = getResources();
+		GCMRegistrar.checkDevice(this);
+		GCMRegistrar.checkManifest(this);
+		final String regId = GCMRegistrar.getRegistrationId(this);
+		if (regId.equals("")) {
+			GCMRegistrar.register(this, res.getString(R.string.push_notification_sender_id));
+			Log.i("PUSH_NOTIFICATION", "ID registered");
+		} else {
+			Log.i("PUSH_NOTIFICATION", "ID already registered");
+		}
+
 		fm = super.getSupportFragmentManager();
 		this.listItems = new ArrayList<Map<String, String>>();
 		this.list = (ListFragment)fm.findFragmentById(R.id.index_list);
