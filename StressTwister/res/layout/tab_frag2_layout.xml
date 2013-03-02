@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="#00FF00"
-  >
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#3f2020"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/ScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="359dp"
+        android:layout_above="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.91"
+        android:fillViewport="true" >
+
+        <RadioGroup
+            android:id="@+id/radioGroupPranksCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/myFirstPrank"
+            android:paddingRight="10dp" >
+
+            <RadioButton
+                android:id="@+id/myFirstPrank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/icon_remove"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:tag="random"
+                android:text="My First Prank" />
+
+        </RadioGroup>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/ic_menu_add"
+        android:textSize="0sp" />
+
+</RelativeLayout>

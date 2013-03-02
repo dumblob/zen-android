@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 
@@ -75,6 +76,7 @@ public class TabsViewPagerFragmentActivity extends FragmentActivity implements T
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Inflate the layout
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.tabs_viewpager_layout);
 		// Initialise the TabHost
 		this.initialiseTabHost(savedInstanceState);
