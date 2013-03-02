@@ -43,4 +43,10 @@ GUI look
   fluidui.com (mockup)
   pozadi muze byt podobne fotce z pozadi banneru na Zen Maraton
 
+GUI howto
+  ListView - do neho nafrkam itemy a on zaridi postupne nacitani, scrollovani apod.
+  audio/video/text_file chooser | nahravani_audio/nahravani_video/text_input
+  android.intent.action.VIEW
+  android.intent.action.SEND
+
 vim: set wrap:
