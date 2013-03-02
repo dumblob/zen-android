@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+import zen.stress.twister.R;
+import zen.stress.twister.fragments.viewpager.PagerAdapter;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,9 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
-
-import zen.stress.twister.R;
-import zen.stress.twister.fragments.viewpager.PagerAdapter;
 
 /**
  * The <code>TabsViewPagerFragmentActivity</code> class implements the Fragment activity that maintains a TabHost using a ViewPager.

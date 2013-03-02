@@ -3,4 +3,6 @@
     <string name="hello">Hello World, mainActivity!</string>
     <string name="app_name">Andy</string>
     <string name="expandable_list_sample_action">Expandable List Sample Action</string>
+    <string name="push_notification_sender_id">85906666173</string>
+    <string name="api_domain">zen.pecserke.eu</string>
 </resources>
