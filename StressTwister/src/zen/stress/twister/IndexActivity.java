@@ -3,17 +3,29 @@
  */
 package zen.stress.twister;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import zen.stress.twister.fragments.tabs.TabsFragmentActivity;
 import zen.stress.twister.fragments.tabs.TabsViewPagerFragmentActivity;
 import zen.stress.twister.fragments.viewpager.ViewPagerFragmentActivity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
@@ -25,18 +37,21 @@ import android.widget.SimpleAdapter;
 import com.google.android.gcm.GCMRegistrar;
 
 /**
- * @author mwho
- * This Activity is responsible for providing an index to the
- * examples in this project
+ * @author mwho This Activity is responsible for providing an index to the
+ *         examples in this project
  */
 public class IndexActivity extends FragmentActivity {
+	private static final String REPORT_LOCATION_URL = "http://%s/api/device/%s/location";
+
 	private FragmentManager fm;
 	private ListFragment list;
 	private List<Map<String, String>> listItems;
 	private String[] froms;
 	private int[] viewIds;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -44,30 +59,25 @@ public class IndexActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.index_list_view);
 
-		Resources res = getResources();
-		GCMRegistrar.checkDevice(this);
-		GCMRegistrar.checkManifest(this);
-		final String regId = GCMRegistrar.getRegistrationId(this);
-		if (regId.equals("")) {
-			GCMRegistrar.register(this, res.getString(R.string.push_notification_sender_id));
-			Log.i("PUSH_NOTIFICATION", "ID registered");
-		} else {
-			Log.i("PUSH_NOTIFICATION", "ID already registered");
-		}
+		this.reportLocation();
+		this.registerPushNotificationsId();
 
 		fm = super.getSupportFragmentManager();
 		this.listItems = new ArrayList<Map<String, String>>();
-		this.list = (ListFragment)fm.findFragmentById(R.id.index_list);
-		//set OnClick Listener
+		this.list = (ListFragment) fm.findFragmentById(R.id.index_list);
+		// set OnClick Listener
 		this.list.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-			/* (non-Javadoc)
-			 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * android.widget.AdapterView.OnItemClickListener#onItemClick(android
+			 * .widget.AdapterView, android.view.View, int, long)
 			 */
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
-				switch(position) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				switch (position) {
 				case 0:
 					IndexActivity.this.startActivity(new Intent(IndexActivity.this, TabsFragmentActivity.class));
 					break;
@@ -75,18 +85,22 @@ public class IndexActivity extends FragmentActivity {
 					IndexActivity.this.startActivity(new Intent(IndexActivity.this, ViewPagerFragmentActivity.class));
 					break;
 				case 2:
-					IndexActivity.this.startActivity(new Intent(IndexActivity.this, TabsViewPagerFragmentActivity.class));
+					IndexActivity.this
+							.startActivity(new Intent(IndexActivity.this, TabsViewPagerFragmentActivity.class));
 					break;
 				}
-				
+
 			}
-			
+
 		});
-		
-		this.froms = new String[] {"name"};
-		this.viewIds = new int[] {android.R.id.text1};
+
+		this.froms = new String[] { "name" };
+		this.viewIds = new int[] { android.R.id.text1 };
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.FragmentActivity#onResume()
 	 */
 	@Override
@@ -98,20 +112,26 @@ public class IndexActivity extends FragmentActivity {
 			this.bind(2, "name", "Tabs View Pager");
 		}
 		// Initialise List Adapter
-		this.list.setListAdapter(new SimpleAdapter(this, this.listItems, android.R.layout.simple_list_item_1, this.froms, this.viewIds));
+		this.list.setListAdapter(new SimpleAdapter(this, this.listItems, android.R.layout.simple_list_item_1,
+				this.froms, this.viewIds));
 		super.onResume();
 	}
-	
+
 	/**
-	 * Binds the key-value data pair to the list item at the specified list position 
-	 * @param pos List item position
-	 * @param col the column name
-	 * @param val column value
+	 * Binds the key-value data pair to the list item at the specified list
+	 * position
+	 * 
+	 * @param pos
+	 *            List item position
+	 * @param col
+	 *            the column name
+	 * @param val
+	 *            column value
 	 * @return the mapping of column values
 	 */
 	private Map<String, String> bind(int pos, String col, String val) {
 		Map<String, String> map = null;
-		if (!this.listItems.isEmpty() && pos < this.listItems.size()) 
+		if (!this.listItems.isEmpty() && pos < this.listItems.size())
 			map = this.listItems.get(pos);
 		else if (map == null) {
 			map = new HashMap<String, String>();
@@ -119,5 +139,76 @@ public class IndexActivity extends FragmentActivity {
 		}
 		map.put(col, val);
 		return map;
+	}
+
+	private void reportLocation() {
+		Resources res = getResources();
+
+		String deviceId = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID);
+		String url = String.format(REPORT_LOCATION_URL, res.getString(R.string.api_domain), deviceId);
+
+		JSONObject object;
+		try {
+			JSONObject location = new JSONObject();
+			// TODO replace mocked coordinations
+			location.put("lat", 0);
+			location.put("lng", 0);
+
+			object = new JSONObject();
+			object.put("location", location);
+		} catch (JSONException e) {
+			e.printStackTrace();
+
+			return;
+		}
+
+		new ReportLocationTask(url, object).execute(null, null, null);
+	}
+
+	private void registerPushNotificationsId() {
+		Resources res = getResources();
+		GCMRegistrar.checkDevice(this);
+		GCMRegistrar.checkManifest(this);
+		final String regId = GCMRegistrar.getRegistrationId(this);
+		if (regId.equals("")) {
+			GCMRegistrar.register(this, res.getString(R.string.push_notification_sender_id));
+			Log.i("PUSH_NOTIFICATION", "ID registered");
+		} else {
+			Log.i("PUSH_NOTIFICATION", "ID already registered");
+		}
+	}
+
+	private static class ReportLocationTask extends AsyncTask<Void, Void, Void> {
+		private String url;
+		private JSONObject data;
+
+		public ReportLocationTask(String url, JSONObject data) {
+			this.url = url;
+			this.data = data;
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpPut method = new HttpPut(this.url);
+			method.setHeader("Accept", "application/json");
+
+			try {
+				StringEntity input = new StringEntity(this.data.toString());
+				input.setContentType("application/json");
+
+				method.setEntity(input);
+				httpClient.execute(method);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
 	}
 }
