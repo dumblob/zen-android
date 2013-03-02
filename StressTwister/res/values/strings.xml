@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">StressTwister</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="hello">Hello World, mainActivity!</string>
+    <string name="app_name">Andy</string>
+    <string name="expandable_list_sample_action">Expandable List Sample Action</string>
 </resources>

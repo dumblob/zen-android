@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.stresstwister"
-    android:versionCode="1"
-    android:versionName="1.0" >
+      package="zen.stress.twister"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17" />
 
-    <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="17" />
-
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.example.stresstwister.MainActivity"
-            android:label="@string/app_name" >
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:name="zen.stress.twister.IndexActivity" android:theme="@android:style/Theme.Light">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="MyOwnActivity"></activity>
-        <activity android:name="PranksActivity"></activity>
+        <activity android:name="zen.stress.twister.fragments.viewpager.ViewPagerFragmentActivity"></activity>
+        <activity android:name="zen.stress.twister.fragments.tabs.TabsFragmentActivity"></activity>
+        <activity android:name="zen.stress.twister.fragments.tabs.TabsViewPagerFragmentActivity"></activity>
     </application>
-
 </manifest>
