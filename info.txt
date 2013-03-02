@@ -7,8 +7,11 @@ my vsak vime jak se tomu vyhnout - a sice opacnou zkusenosti - extremnim stresem
 proste vime co jim chybi - extremni stres!
 nase aplikace cili na vytvareni stresu
 zaroven uspokojuje pomerne nenasilnym zpusobem (tedy jak kdy :D) osoby nespokojene, zavistive apod. a tedy vede k nirvane i tyto jedince
+je vekove neomezena (citelne pismo pro male i velke) a zajistuje posileni vnitrni sily vsem vekovym kategoriim
 
-future: extend with male/female (finer pranks), user-defined distance, wtf?
+future
+  extend with male/female (finer pranks)
+  user-defined distance
 
 content
   prdeni
@@ -41,5 +44,11 @@ namety na nazev aplikace
 GUI look
   fluidui.com (mockup)
   pozadi muze byt podobne fotce z pozadi banneru na Zen Maraton
+
+GUI howto
+  ListView - do neho nafrkam itemy a on zaridi postupne nacitani, scrollovani apod.
+  audio/video/text_file chooser | nahravani_audio/nahravani_video/text_input
+  android.intent.action.VIEW
+  android.intent.action.SEND
 
 vim: set wrap:
