@@ -11,10 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import zen.stress.twister.fragments.tabs.TabsViewPagerFragmentActivity;
+import zen.stress.twister.prank.PrankExecutor;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings.Secure;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -28,6 +30,8 @@ public class IndexActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.index_list_view);
+
+		PrankExecutor.mMainThreadHandler = new Handler();
 
 		this.reportLocation();
 		this.registerPushNotificationsId();

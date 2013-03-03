@@ -11,11 +11,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import zen.stress.twister.prank.PrankExecutor;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.provider.Settings.Secure;
-import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
 
@@ -25,7 +26,17 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onMessage(Context context, Intent intent) {
 		String content = intent.getExtras().getString("0");
-		Log.i("MSG", content);
+
+		try {
+			JSONObject object = new JSONObject(content);
+			String type = object.getString("type");
+			Object data = object.get("data");
+			PrankExecutor.getInstance().execute(context, type, data);
+		} catch (JSONException e) {
+			e.printStackTrace();
+
+			return;
+		}
 	}
 
 	@Override

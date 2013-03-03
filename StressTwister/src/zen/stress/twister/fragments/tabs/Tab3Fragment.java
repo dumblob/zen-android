@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class Tab3Fragment extends Fragment {
-	public static final String[] pranks = new String[] { "Fart", "FalseAlarm", "Vibration" };
+	public static final String[] pranks = new String[] { "Fart", "FalseAlarm", "Vibration", "SexyGirl" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

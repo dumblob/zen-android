@@ -94,6 +94,9 @@ public class Tab1Fragment extends Fragment {
 				}
 
 				object.put("data", new JSONArray(list));
+			} else if (prank.equalsIgnoreCase("sexygirl")) {
+				object.put("type", "image");
+				object.put("data", "sexy_girl");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

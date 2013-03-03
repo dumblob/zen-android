@@ -1,43 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="zen.stress.twister"
-      android:versionCode="1"
-      android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17" />
+    package="zen.stress.twister"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
 
     <permission
         android:name="zen.stress.twister.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="zen.stress.twister.permission.C2D_MESSAGE"/>
+
+    <uses-permission android:name="zen.stress.twister.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- App receives GCM messages. -->
-	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-	<!-- GCM connects to Google Services. -->
-	<uses-permission android:name="android.permission.INTERNET" />
-	<!-- GCM requires a Google account. -->
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<!-- Keeps the processor from sleeping when a message is received. -->
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- GCM connects to Google Services. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <application android:icon="@drawable/icon" android:label="@string/app_name" android:allowBackup="true">
-        <activity android:name="zen.stress.twister.IndexActivity" android:theme="@android:style/Theme.Light">
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <activity
+            android:name="zen.stress.twister.IndexActivity"
+            android:theme="@android:style/Theme.Light" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="zen.stress.twister.fragments.viewpager.ViewPagerFragmentActivity"></activity>
-        <activity android:name="zen.stress.twister.fragments.tabs.TabsFragmentActivity"></activity>
-        <activity android:name="zen.stress.twister.fragments.tabs.TabsViewPagerFragmentActivity"></activity>
+        <activity android:name="zen.stress.twister.fragments.viewpager.ViewPagerFragmentActivity" >
+        </activity>
+        <activity android:name="zen.stress.twister.fragments.tabs.TabsFragmentActivity" >
+        </activity>
+        <activity android:name="zen.stress.twister.fragments.tabs.TabsViewPagerFragmentActivity" >
+        </activity>
 
-        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="zen.stress.twister" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".GCMIntentService"></service>
+        <service android:name=".GCMIntentService" >
+        </service>
     </application>
+
 </manifest>
