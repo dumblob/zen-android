@@ -11,7 +11,7 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="80dip"
+        android:minHeight="60dip"
         android:minWidth="250dip"
         android:tag="any"
         android:text="50 m" />
@@ -23,7 +23,7 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/button1"
         android:layout_marginTop="20dp"
-        android:minHeight="80dip"
+        android:minHeight="60dp"
         android:minWidth="250dip"
         android:tag="any"
         android:text="100 m" />
@@ -35,7 +35,7 @@
         android:layout_alignRight="@+id/button2"
         android:layout_below="@+id/button2"
         android:layout_marginTop="20dp"
-        android:minHeight="80dip"
+        android:minHeight="60dp"
         android:minWidth="250dip"
         android:tag="any"
         android:text="1 km" />
@@ -47,7 +47,7 @@
         android:layout_alignLeft="@+id/button3"
         android:layout_below="@+id/button3"
         android:layout_marginTop="20dp"
-        android:minHeight="80dip"
+        android:minHeight="60dp"
         android:minWidth="250dip"
         android:tag="any"
         android:text="Anyone in the universe" />
