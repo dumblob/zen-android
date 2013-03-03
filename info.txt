@@ -51,4 +51,8 @@ GUI howto
   android.intent.action.VIEW
   android.intent.action.SEND
 
+todo
+  malinko zvetsit pismo
+  zrusit kompatibilitu se starymi verzemi Androidu
+
 vim: set wrap:
