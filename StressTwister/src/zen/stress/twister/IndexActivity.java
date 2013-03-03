@@ -15,7 +15,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,17 +27,10 @@ import com.google.android.gcm.GCMRegistrar;
 public class IndexActivity extends FragmentActivity {
 	private static final String REPORT_LOCATION_URL = "http://%s/api/device/%s/location";
 
-	MyLocationListener mlocListener;
-	LocationManager mlocManager;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.index_list_view);
-
-		mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		mlocListener = new MyLocationListener();
-		mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
 		this.reportLocation();
 		this.registerPushNotificationsId();
@@ -55,14 +47,17 @@ public class IndexActivity extends FragmentActivity {
 		JSONObject object;
 		try {
 			JSONObject location = new JSONObject();
-			if (mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-				if (MyLocationListener.latitude > 0) {
-					location.put("lat", MyLocationListener.latitude);
-					location.put("lng", MyLocationListener.longitude);
-				}
+
+			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+			if (loc != null && loc.getLatitude() != 0) {
+				Log.i("GPS", String.format("%f, %f", loc.getLatitude(), loc.getLongitude()));
+				location.put("lat", loc.getLatitude());
+				location.put("lng", loc.getLongitude());
 			} else {
-				location.put("lat", 0);
-				location.put("lng", 0);
+				location.put("lat", 0.0);
+				location.put("lng", 0.0);
 			}
 
 			object = new JSONObject();
@@ -122,51 +117,4 @@ public class IndexActivity extends FragmentActivity {
 			return null;
 		}
 	}
-
-	public static class MyLocationListener implements LocationListener {
-
-		private static double latitude;
-		private static double longitude;
-
-		@Override
-		public void onLocationChanged(Location loc) {
-			MyLocationListener.latitude = loc.getLatitude();
-			MyLocationListener.longitude = loc.getLongitude();
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-			Log.i("GPS", "provider enabled");
-
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extra) {
-			// TODO Auto-generated method stub
-
-		}
-
-		public void setLatitude(double latitude) {
-			MyLocationListener.latitude = latitude;
-		}
-
-		public double getLatitude() {
-			return latitude;
-		}
-
-		public void setLongitude(double longitude) {
-			MyLocationListener.longitude = longitude;
-		}
-
-		public double getLongitude() {
-			return longitude;
-		}
-
-	}
-
 }
