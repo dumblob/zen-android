@@ -25,7 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class PrankExecutor {
-	public static Handler mMainThreadHandler = null;
 	private static PrankExecutor singleton;
 
 	private PrankExecutor() {
